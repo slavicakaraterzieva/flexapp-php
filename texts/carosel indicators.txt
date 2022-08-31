@@ -1,0 +1,14 @@
+ <ol class="carousel-indicators">
+   <?php
+   if($image_num==1){
+    echo '<li data-target="#carouselExampleIndicators-<?php echo $p->post_id;?>" data-slide-to="0" " class="active" ></li>';
+   }
+   else{
+     if($image_num>1){
+       for($i=1; $i<$image_num; $i++){
+        echo '<li data-target="#carouselExampleIndicators-<?php echo $p->post_id;?>" data-slide-to="'.$i.'" class="active" ></li>';
+       }
+     }
+   }
+   ?>
+   </ol>

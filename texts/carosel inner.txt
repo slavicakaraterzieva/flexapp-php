@@ -1,0 +1,26 @@
+      <!-- Wrapper for slides carosel inner-->
+   <div class="carousel-inner">
+       <?php
+       if($image_num==0){
+         echo ' <div class="item active">
+         <img src="img/posts/bannon-morrissy-house.jpg" alt="default slide">
+       </div> ';
+       }
+       else{
+        for($i=1;$i<$image_num;$i++){
+          if($i==1){
+            echo ' <div class="item active">
+            <img src="../img/posts/"'.$post_featured_image_pieces[0].' alt="first slide">
+          </div> ';
+          }
+        
+            echo ' <div class="item active">
+            <img src="../img/posts/"'.$post_featured_image_pieces[$i].' alt="second slide">
+          </div> ';
+          
+        }
+       }
+       ?> 
+      
+    </div>
+      <!--end of wrapper for slides carosel inner-->

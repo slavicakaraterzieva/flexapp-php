@@ -1,0 +1,49 @@
+      <!-- Wrapper for slides carosel inner-->
+       <div class="carousel-inner">
+       <?php
+    If($image_num==0){
+         echo '<div class="item active">
+         <img src="./img/posts/bannon-morrissy-house.jpg" alt="default slide">
+         <div class="galery-description">
+           <div class="galery-description-heading">
+             Address: Partizanski Odredi no: 23
+           </div>
+         </div>
+       </div>';
+       }
+       if($image_num==1){
+        echo '<div class="item active">
+        <img src="./img/posts/'.$post_featured_image_pieces[0].'" alt="first slide">
+        <div class="galery-description">
+          <div class="galery-description-heading">
+            Address: Partizanski Odredi no: 23
+          </div>
+        </div>
+      </div>';
+       }
+       else{
+        for($j=1; $j<$image_num; $j++){
+          if($j==1){
+         echo '<div class="item active">
+         <img src="./img/posts/'.$post_featured_image_pieces[0].'" alt="first slide">
+         <div class="galery-description">
+           <div class="galery-description-heading">
+             Address: Partizanski Odredi no: 23
+           </div>
+         </div>
+       </div>';
+        }
+       
+          echo '<div class="item active">
+          <img src="./img/posts/'.$post_featured_image_pieces[$j].'" alt="next slide">
+         <div class="galery-description">
+          <div class="galery-description-heading">
+           Address: Partizanski Odredi no: 23
+          </div>
+         </div>
+        </div>';
+      }
+       }
+        ?>
+     </div>
+      <!--end of wrapper for slides carosel inner--> this loads the photos from database 
