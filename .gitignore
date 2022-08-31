@@ -12,3 +12,5 @@
 *.vsix
 .htaccess
 .env
+/config/config.php
+/texts
