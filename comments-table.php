@@ -17,7 +17,7 @@ include ("bootstrap.php");?>
 
 <main class="content-center">
 
-<?php include ("./inc/profile-search.php");?>
+
 <?php include ("./inc/popup-modal.php");?>
 <?php include ("./inc/display-message.php");?>
 <?php include ("./inc/my-comments.php");?>
