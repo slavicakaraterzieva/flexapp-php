@@ -11,3 +11,12 @@ $(function() {
         $html.removeClass('col-md-4');
     }).trigger('resize');
 })
+
+
+
+   
+     
+      
+           
+    
+    

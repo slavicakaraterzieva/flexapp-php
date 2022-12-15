@@ -13,33 +13,39 @@
           {
               //alert(data);
               //console.log(data);
-              $('.dropdown-menu').html(data.notification);
+               $('.dropdown-menu').html(data.notification);
                $('.countComments').html(data.unseen_notification);
           }
       });
   }
   unseenComment();
 
-    function toggleComments(){ 
-      $(".comments").click(function(){
-          $(".dropdown-menu").toggle();  
-     });  
-    }
+  function toggleComments(){ 
+    $(".comments").click(function(){
+         $(".dropdown-menu").toggle();  
+        //alert("clicked");
+   });
+  } 
   toggleComments();
 
-  function updateComment(){
-   $("#comments").addClass('unseen'); 
-     $(document).on('mouseleave', '.unseen', function(){ 
-      $('.countComments').html('0');
-      unseenComment('all comments seen');
-     })
+  function toggleLogin(){
+    $(".user-name").click(function(){
+      //alert("clicked");
+           $("#nav_user-link").toggle();
+    })
   }
-   updateComment();
+  toggleLogin();
 
- 
+  function updateComment(){
+  $("#comments").addClass('unseen'); 
+   $(document).on('mouseleave', '.unseen', function(){ 
+    $('.countComments').html('0');
+    unseenComment('all comments seen');
+   })
+  }
+  updateComment();
    /*   $('.countComments').html('0');
      unseenComment('all comments seen'); */
 })
-
 
 

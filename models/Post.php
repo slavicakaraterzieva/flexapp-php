@@ -30,6 +30,12 @@ public function getPostByPostId($post_id){
     return $result;
 }//end of getPostByPostId
 
+public function getPostId(){
+    $this->db->query('SELECT post_id FROM `posts` ORDER BY post_id DESC LIMIT 1');
+    $result =$this->db->single();
+    return $result;
+}
+
 //function getPostData
 public function getPostDate($created_at){
     $date = new DateTime($created_at);
@@ -68,6 +74,12 @@ public function getPostByUserPayment($post_id){
     return $row;  
 }
 //end of getPostByUserPayment
+
+public function getPostUserInfo($post_id){
+    $this->db->query('SELECT * FROM `posts` JOIN `users` ON `posts`.`user_id` = `users`.`user_id` WHERE `posts`.`post_id` = :post_id ORDER BY post_id DESC');
+    $this->db->bind(':post_id', $post_id);
+    $result =$this->db->single();
+    return $result;}
 
 //postData
 /* function postData($user_id){

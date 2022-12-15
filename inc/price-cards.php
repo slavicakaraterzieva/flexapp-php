@@ -70,7 +70,7 @@
                <ul>
                    <li><i class="fa fa-check price-li"></i>Get the best deal</li>
                    <li><i class="fa fa-check price-li"></i>First place for a month</li>
-                   <li><i class="fa fa-check price-li" ></i>Will be active for six monunts, then it will expire</li>
+                   <li><i class="fa fa-check price-li" ></i>Will be active for six months, then it will expire</li>
                    <li><i class="fa fa-check price-li"></i>Extend promotion or switch to other package</li>
                </ul>
            </div>

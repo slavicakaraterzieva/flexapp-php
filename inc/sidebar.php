@@ -81,11 +81,11 @@
 </li>
 
 <li class="sidebar_list">
-    <a href="estate.php" class="sidebar_link">
+    <a href="create-add.php" class="sidebar_link">
         <svg class="sidebar_icon">
             <use xlink:href="./svg/symbol-defs.svg#icon-attachment"></use>
         </svg>
-        <button type="submit" class="sidebar_link-btn">Create Estate Post</button>
+        <button type="submit" class="sidebar_link-btn">Create Post</button>
     </a>
 </li>
 

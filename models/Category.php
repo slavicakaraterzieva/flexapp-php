@@ -20,6 +20,14 @@ public function getCategoryName($category_id){
     return $row ;
     }//end of get category name
 
+    public function getCatId($cat_title){
+        $this->db->query('SELECT * FROM categories WHERE category_title = :category_title');
+        //bind params
+        $this->db->bind(':category_title',$cat_title);
+        $row = $this->db->single();
+        return $row ;
+        }//end of function   
+
 }//end of class Category
 
 ?>

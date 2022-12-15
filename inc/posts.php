@@ -19,6 +19,7 @@
    $user_id = $_SESSION['user_id'];
    $userPosts = $post->getAllPosts($user_id);
    //print_r($userPost);
+
    if($userPosts){
      foreach($userPosts as $p){
        $thePost = $post->getPostByPostId($p->post_id);
@@ -29,6 +30,12 @@
        $image_num = $img->getPostImages($post_featured_image);
        $post_featured_image_pieces = $img->getAllImages($post_featured_image);
        //print_r($post_featured_image_pieces);
+       $getRealEstate=$estate->getRealEstatePost($post_id);
+       $postInfo = $post->getPostUserInfo($post_id);
+        //print_r($postInfo);
+        $post_category = $category->getCategoryName($postInfo->post_cat_id);
+        $cat_name = $post_category->category_title;
+        //echo $cat_name;
    ?>
   <!--third card bye a house-->
   <div class="col-md-4 col-sm-6">
@@ -36,7 +43,8 @@
            <div class="post">
    <div class="post-total_images"><?php echo $image_num;?></div>
    <h3 class="post-heading"><?php echo $p->post_title?></h3>
-   
+         
+
    <!--carosel-->
    <div id="myCarousel-300-<?php echo $p->post_id;?>" class="carousel slide post_img" data-ride="carousel" data-interval="false">
    <!--indicators-->
@@ -61,7 +69,7 @@
        <?php
   if($image_num == 0){
     echo '<div class="item active carosel-item">
-           <img src="./img/posts/bannon-morrissy-house.jpg" alt="default">
+           <img src="./img/users/img-button.png" alt="default">
          </div>';}
     //end of first if it works
     if($image_num == 1){
@@ -80,13 +88,10 @@
              <img src="./img/posts/'.$post_featured_image_pieces[$i].'" alt="third slide">
            </div>';
     }
-  }//it works :)
+  }//it works 
         ?>
-  
-
 </div>
       <!--end of wrapper for slides carosel inner--> 
-    
 
        <!-- Left and right controls working without carosel inner-->
        <a class="left carousel-control" href="#myCarousel-300-<?php echo $p->post_id;?>" data-slide="prev">
@@ -103,6 +108,33 @@
       <div class="post-price">
           <h3 class="post-price_margin"><sup>$</sup><?php echo $p->content_price*100;?> </h3>
       </div>
+
+
+      
+    <div class="post-icons">
+      
+       <div class="advertisement-svg-icon">
+         <?php if($cat_name =="realestate"):?>
+                 <svg>
+                     <use xlink:href="svg/symbol-defs.svg#icon-home_filled"></use>
+                 </svg>
+                 <span><?php if (isset($getRealEstate->post_property_type)) {echo $getRealEstate->post_property_type;} ?></span>
+
+                 <svg>
+                     <use xlink:href="svg/symbol-defs.svg#icon-hotel"></use>
+                 </svg>
+                 <span><?php if (isset($getRealEstate->bedroom)) {echo $getRealEstate->bedroom;}?></span>
+
+                 <svg>
+                     <use xlink:href="svg/symbol-defs.svg#icon-connection"></use>
+                 </svg>
+                 <span>Wifi <?php if (isset($getRealEstate->internet)) {echo $getRealEstate->internet;}?></span>
+                 <?php endif ?>
+             </div>
+             <!-- end of svg icons -->
+   </div>
+   
+
       <div class="post-description">
           <p class="post-description_content">
              <?php
@@ -111,10 +143,7 @@
           </p>
       </div>
    
-      <div class="post-icons">
-   
-      </div>
-   
+     
       <div class="post-link">
     <!--       <a href="#payment" class="post-link_edit post-link_add">add to cart<i class="fa fa-shopping-cart"></i></a> 
           <br></br>
