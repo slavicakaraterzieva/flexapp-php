@@ -1,13 +1,15 @@
+
 <?php include ("bootstrap.php");?>
 <!DOCTYPE html>
 <html lang="eng">
 <?php include ("./inc/head.php");?>
+<?php include ("./models/Job.php");?>
+<?php include ("./models/Category.php");?>
 <body>
 
-<!-- <script type= "text/javascript" src="./js/locateAddress.js"></script> -->
 
-
-
+       
+<!---->
 
 <div class=" my-flex-container">
 
@@ -17,7 +19,6 @@
 <?php include("./inc/sidebar.php");?>
 
 <main class="content-center">
-
 
 <?php
 if(isset($_GET['page'])){
@@ -75,16 +76,23 @@ switch($page){
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js">
     </script> 
+<?php
+$job = new Job();
+$cat = new Category();
+$cat_title = "car";
+$parent_id=$cat->getCatId($cat_title);
+$allJobs=$job->getAllJobs($parent_id->category_id);
 
+?>
 <!--profile form-->
 <section class="content-form">
    
-<div class="heading-tertiary">Create Estate Add / Post</div>
+<div class="heading-tertiary">Create Any Add / Post</div>
   
    <form method="POST" name="multiplesub" id="multiplesub" class="profile-form" action="<?php echo BASE_FLEX?>php/add-post.php" enctype="multipart/form-data">
  
      <div>
-       <label class="label-style" style="line-height:2rem;">Every free post can be posted for 30 days</label>
+       <label class="label-style"style="line-height:2rem;" >Every free post can be posted for 30 days</label>
      </div>
  
      <div class="label-style">
@@ -92,21 +100,47 @@ switch($page){
        <input type="text" class="input-style" name="post_title" id="post_title" placeholder="enter your title" autocomplete="off" required>
      </div>
 
-  <div class="categories">
-
+  <div class="categories" id="job_main_category">
+ 
+     
        <div class="label-style profile-form_left-select">
-         <label for="property_type">Select Property Type</label>
-        <select  class="form-control select-style input-style" name="property_type" id="property_type" required>
-         <option value="apartment">apartment</option>
-         <option value="house">house</option>
-         <option value="loft">loft</option>
-         <option value="unit">unit</option>
-         <option value="villa">villa</option>
-         <option value="land">land</option>
+         <label for="select_job_category"> Select From Category List</label>
+         <select  class="form-control select-style input-style" name="select_job_category" id="select_job_category" required>
+         <option value="select">Select</option>
+         <?php foreach($allJobs as $jobs){
+echo"<option value='$jobs->job_category_id' id='selectedIndex'>$jobs->job_category_title</option>";
+         }?>
         </select>
        </div>
+  </div><!--end of first categories-->
 
-   <div class="label-style profile-form_left-select">
+
+  <div class="categories" id="job_sub_category">
+       <div class="label-style profile-form_left-select">
+         <label for="select_job_subcategory"> Select From Subcategory List</label>
+        <select  class="form-control select-style input-style" name="select_job_subcategory" id="select_job_subcategory" required>
+        <option value="select" id="selectedSub">Select</option>
+        <option value="" id="selectedSub"></option>
+        </select>
+       </div>
+  </div><!--end of sub categories-->
+
+  
+  <div class="categories" id="job_occupation_title">
+
+    
+       <div class="label-style profile-form_left-select">
+         <label for="job_occupation_list">Select From Product List</label>
+        <select  class="form-control select-style input-style" name="job_occupation_list" id="job_occupation_list" required>
+         <option value="select" id="selectedOccupation">Select</option>
+         <option value="" id="selectedOccupation"></option>
+        </select>
+       </div>
+  </div><!--end of model list-->
+
+  <div class="categories">
+
+<div class="label-style profile-form_left-select">
       <label for="post_type">Post Type</label>
       <select  class="form-control select-style input-style" name="post_type" id="post_type" required>
       <?php 
@@ -118,53 +152,27 @@ switch($page){
         <?php if($setPrice="premium"){?>
         <option value="premium 5">Premium <?php echo "$ ".$setPrice = 5;}?></option>      
      </select> 
-  
    </div>
-
       <div class="label-style">
        <label for="specific_item">Add Image</label>
-       <input type="file" class="form-control input-style" name="file[]" id="post_featured_img" multiple="multiple" required>
+       <input type="file" class="form-control input-style" name="file[]" id="post_featured_img" multiple="multiple">
      </div>
 
      <div class="label-style profile-form_left-select">
-       <label for="specific_item">Add Price</label>
-       <input type="text" class="form-control input-style" name="content_price" id="content_price" required>
+       <label for="content_price">Add Price</label>
+       <input type="number" class="form-control input-style" name="content_price" id="content_price" placeholder="numbers only" required>
      </div>
 
      <div class="label-style profile-form_left-select">
-       <label for="specific_item">Floors</label>
-       <input type="text" class="form-control input-style" name="floor" id="floor">
+       <label for="contact_email">Add Contact Email</label>
+       <input type="text" class="form-control input-style" name="contact_email" id="contact_email" required>
      </div>
 
      <div class="label-style profile-form_left-select">
-       <label for="specific_item">Lounge Areas</label>
-       <input type="text" class="form-control input-style" name="lounge" id="lounge">
+       <label for="contact_phone">Add Contact Phone</label>
+       <input type="number" class="form-control input-style" name="contact_phone" id="contact_phone" required>
      </div>
-
-     <div class="label-style profile-form_left-select">
-       <label for="specific_item">Kitchen Areas</label>
-       <input type="text" class="form-control input-style" name="kitchen" id="kitchen">
-     </div>
-
-     <div class="label-style profile-form_left-select">
-       <label for="specific_item"> Bedrooms</label>
-       <input type="text" class="form-control input-style" name="bedroom" id="bedroom">
-     </div>
-      
-     <div class="label-style profile-form_left-select">
-       <label for="specific_item">Bathrooms</label>
-       <input type="text" class="form-control input-style" name="bath" id="bath">
-     </div>
-
-     <div class="label-style profile-form_left-select">
-       <label for="specific_item">Toilets</label>
-       <input type="text" class="form-control input-style" name="wc" id="wc">
-     </div>
-
-     <div class="label-style profile-form_left-select">
-       <label for="specific_item">Parking Space</label>
-       <input type="text" class="form-control input-style" name="parking" id="parking">
-     </div>
+    </div><!--end of the rest categories-->
 
      <div class="label-style profile-form_left-select">
          <label for="sale_type">Select Sale Type</label>
@@ -175,48 +183,28 @@ switch($page){
          <option value="swap">swap</option>
         </select>
 
-        <div class="label-style profile-form_left-select">
-         <label for="outdoor_features">Outdoor Features</label>
-        <select  class="form-control select-style input-style" name="outdoor_features" id="outdoor_features">
-         <option value="none">none</option>
-         <option value="balcony">balcony</option>
-         <option value="front yard">front yard</option>
-         <option value="back yard">back yard</option>
-         <option value="patio">patio</option>
-         <option value="gazebo">gazebo</option>
-        </select>
+      
+  <div class="label-style radio-btn profile-form_item-buttons">
+   
+   <div class="profile-form_radio-group">
+     <input type="radio" class="profile-form_radio-input" name="radio-price" id="option_yes" value="yes"  readonly="">
+     <label for="option_yes" class="profile-form_radio-label">
+       <span class="profile-form_radio-btn"></span> Used
+     </label>
+   </div><!--first radio-->
 
-        <div class="profile-form_item-price">
-         
-         <div class="label-style">
-           <label for="internet">Internet</label>
-           <input type="text" style="background-color:transparent; border:none; box-shadow:none; font-size:1.8rem; font: wait 400px;" class="form-control select-style input-style" name="internet_option" id="internet_option" placeholder="select option yes or no" readonly>
-         </div>
-   
-         <div class="label-style radio-btn profile-form_item-buttons">
-   
-           <div class="profile-form_radio-group">
-             <input type="radio" class="profile-form_radio-input" name="radio-price" id="option_yes" value="yes"  readonly="">
-             <label for="option_yes" class="profile-form_radio-label">
-               <span class="profile-form_radio-btn"></span>Yes
-             </label>
-           </div><!--first radio-->
-   
-           <div class="profile-form_radio-group">
-             <input type="radio" class="profile-form_radio-input"  name="radio-price" id="option_no" value="no"  readonly="">
-             <label for="option_no" class="profile-form_radio-label">
-               <span class="profile-form_radio-btn"></span>No
-             </label>
-           </div><!--second radio-->
-   
-         </div>
-   <!--end of radio btn-->
+   <div class="profile-form_radio-group">
+     <input type="radio" class="profile-form_radio-input"  name="radio-price" id="option_no" value="no"  readonly="">
+     <label for="option_no" class="profile-form_radio-label">
+       <span class="profile-form_radio-btn"></span> Not Used
+     </label>
+   </div><!--second radio-->
 
-       </div>
-   <!--end of item price-->
-  
-  </div><!--end of categoties-->
+ </div>
+<!--end of radio btn-->
 
+<br></br>
+<br></br>
  <!--text editor-->
  <div class="label-style">
    <label for="summernote">Enter Your Content</label>
@@ -244,13 +232,13 @@ switch($page){
    </script><!--text editor-->
 
  <div id="locationField" class="label-style">
- <input id="autocomplete" class="input-style" placeholder="Enter address" type="text" name="full_address"/>
+ <input id="autocomplete" class="input-style" placeholder="Enter address" type="text" name="full_address" required/>
  </div>
  
  <br>
  <!--submit btn-->
  <div class="">
-   <button type="submit" class="form-btn" name="submit_realestate_post" id="submit_realestate_post">Publish</button>
+   <button type="submit" class="form-btn" name="submit_job_post" id="submit_car_post">Publish</button>
  </div>
  <br>
  <!--end of submit btn-->
@@ -273,7 +261,10 @@ switch($page){
      <!-- <script src="./js/scroll.js"></script> -->
      <script src="./js/response.js"></script>
      <script src="./js/unseenComments.js"></script>
-     <script src="./js/dynamic_pills.js"></script><!--not working from here  -->
+     <script src="./js/dynamic_pills.js"></script>
+     <script src="./js/switch_category.js"></script>
+     <script src="./js/load_job_subs.js"></script>
+     <!--not working from here  -->
 <!--bootstrap again-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="./sass/vendors/bootstrap/css/bootstrap.min.css"></script>
@@ -281,7 +272,5 @@ switch($page){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./sass/vendors/jquery3.5.0.js"></script>
-       
-
 <body>
 </html>

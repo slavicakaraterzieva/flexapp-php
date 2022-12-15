@@ -16,7 +16,7 @@
 <?php include("inc/sidebar.php");?>
 
 <main class="content-center">
-<?php include ("inc/profile-search.php");?>
+
 
 <?php
     //include ("./inc/unpaid-posts.php");   ?>

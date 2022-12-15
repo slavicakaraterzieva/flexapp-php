@@ -13,7 +13,7 @@
 <?php include("./inc/sidebar.php");?>
 
 <main class="content-center">
-<?php include ("./inc/profile-search.php");?>
+ <?php include ("./inc/profile-search.php");?> 
 
 <?php
 if(isset($_GET['page'])){
@@ -43,9 +43,9 @@ switch($page){
     include ("./inc/shoping-cart.php");
     break;
 
-    case 'profile-search';
+  /*   case 'profile-search';
     include ("./inc/profile-search.php");
-    break;
+    break; */
 
     case 'unpaid-posts';
     include ("./inc/unpaid-posts.php");

@@ -15,8 +15,6 @@
 
 <main class="content-center">
 
-<?php include ("./inc/profile-search.php");?>
-
 <?php include ("./inc/update-user-details.php");?>
 </div>
 </main>
